@@ -1,5 +1,6 @@
 <?php
-
+// Gestion des droits
+umask(0000);
 use Symfony\Component\HttpFoundation\Request;
 
 /**
