@@ -41,7 +41,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "braincrafted/bootstrap-bundle": "dev-master",
-        "twitter/bootstrap": "2.3.*",
+        "twitter/bootstrap": "^3.0",
         "jquery/jquery": "1.9.*"
     },
     "require-dev": {
