@@ -5,12 +5,83 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link href="{{ asset('bootstrap/css/bootstrap-responsive.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
+<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+<!-- Bootstrap core CSS -->
+    <link href="./Jumbotron Template for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./Jumbotron Template for Bootstrap_files/jumbotron.css" rel="stylesheet">
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+
+
+
+    <body style="background-color:black">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+             <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    </button>
+                    <a class="navbar-brand" href="#">Retable</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Voir les offres<span class="sr-only">(current)</span></a></li> 
+                        <li class="active"><a href="#">Répondre à nos questionnaires<span class="sr-only">(current)</span></a></li>           
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <button type="submit" class="btn btn-success">S'inscrire</button>
+                        <button type="submit" class="btn btn-default">S'authentifier</button>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Bienvenue sur Retable !</h1>
+                <p>Retable est une application qui permet de mettre en relation des entreprises et des personnes en recherche d'emplois. Les entreprises peuvent faire passer des tests de compétences et de personnalité aux candidats ce qui leurs permet de sélectionner les candidats répondant le plus à leur attentes. Cela permet aussi au candidat de prouver leurs compétences et leurs motivations !</p>
+                <p><a class="btn btn-primary btn-lg" href="http://v4-alpha.getbootstrap.com/examples/jumbotron/#" role="button">S'inscrire »</a></p>
+            </div>
+        </div>
+
+        <div class="container">
+        <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-4">
+                    <h2><font color="white">Entreprise A</font></h2>
+                    <p><font color="grey">Nous recherchons un développeur Web ayant des compétences en PHP-Symfony 2 ainsi qu'en jQuery pour refaire notre site internet </font></p>
+                    <p><a class="btn btn-primary" href="http://v4-alpha.getbootstrap.com/examples/jumbotron/#" role="button">Postuler »</a></p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h2><font color="white">Entreprise B</font></h2>
+                    <p><font color="grey">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </font></p>
+                    <p><a class="btn btn-primary" href="http://v4-alpha.getbootstrap.com/examples/jumbotron/#" role="button">Postuler »</a></p>
+                </div>
+
+                <div class="col-md-4">
+                    <h2><font color="white">Entreprise C</font></h2>
+                    <p><font color="grey">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</font></p>
+                    <p><a class="btn btn-primary" href="http://v4-alpha.getbootstrap.com/examples/jumbotron/#" role="button">Postuler »</a></p>
+                </div>
+            </div>
+       <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     </body>
+
+
+
 </html>
