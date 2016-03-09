@@ -2,39 +2,48 @@
 # http://symfony.com/doc/current/book/security.html
 security:
 
+    # L'encodage des password
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        OCUserBundle\Entity\User: sha512
     
+    # la hierachie des roles
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-    providers:
-        in_memory:
-            memory: 
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        # Un admin hérite des droits de chomeur et d'entreprise
+        ROLE_ADMIN:       [ROLE_CHOMEUR, ROLE_ENTREPRISE]
 
-    firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
+        # Le super admin a, en plus, la possibilité de changer de role
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    
+    # Gestion des droits sur l'url par role
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
         
+    # Gestion du provider de comptes
+    providers:
+        providerLoadFromBdd:
+            id: fos_user.user_provider.username
+
+    # Gestion de l'authentification
+    firewalls:
+        # Désactive l'authentification pour les assets et le profiler
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-   
+        # Désactive l'authentification pour la page de login   
         main_login:
             pattern: ^/login$
             anonymous: true
-   
+
+        # Active l'authentification pour le reste du site
         main:
             pattern: ^
             anonymous: false
-            provider:  in_memory
+            provider:  providerLoadFromBdd
+            # Redirection vers le formulaire de connexion
             form_login:
-                login_path: login
-                check_path: login_check
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+
             logout:
-                path:   logout
-                target: /
+                path:       fos_user_security_logout
+                target:     /

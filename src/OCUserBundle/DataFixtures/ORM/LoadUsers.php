@@ -31,9 +31,7 @@ class LoadUser implements FixtureInterface {
 				// Le nom d'utilisateur et le mot de passe sont identiques
 				$user->setUsername ( $name );
 				$user->setPassword ( $name );
-				
-				// On ne se sert pas du sel pour l'instant
-				$user->setSalt ( '' );
+				$user->setemail ( "{$name}_en_test@freemail.com" );
 				
 				// On définit uniquement le role ROLE_CHOMEUR qui est le role de base
 				$user->setRoles (array (
