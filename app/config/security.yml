@@ -29,9 +29,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        # Désactive l'authentification pour la page de login   
+        # Désactive l'authentification pour la page d'index, de login, et d'inscription
         main_login:
-            pattern: ^/login$
+            pattern: ^/(|login)$
             anonymous: true
 
         # Active l'authentification pour le reste du site
@@ -39,11 +39,14 @@ security:
             pattern: ^
             anonymous: false
             provider:  providerLoadFromBdd
+            logout: true
             # Redirection vers le formulaire de connexion
             form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
-
             logout:
-                path:       fos_user_security_logout
+                path:       /logout
                 target:     /
+
+    access_control:
+            - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

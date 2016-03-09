@@ -10,6 +10,10 @@
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 
+# Sessions
+/var/sessions/*
+!/var/sessions/.gitkeep
+
 # Parameters
 /app/config/parameters.yml
 /app/config/parameters.ini
@@ -39,3 +43,6 @@
 # Composer PHAR
 /composer.phar
 /composer.lock
+
+# Modifs IDE
+/.idea/
