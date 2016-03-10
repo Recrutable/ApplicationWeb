@@ -8,3 +8,51 @@ Ceci est le body !
 <br />
 Voici la variable : {{ variable }}    
 {% endblock %}
+
+{% block notificationInfos %}
+
+<div class="notification">
+	<div class="alert alert-info" role="alert">
+  		<strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+	</div>
+</div>
+
+{% endblock %}
+
+{% block notificationWarning %}
+
+<div class="notification">
+	<div class="alert alert-warning" role="alert">
+ 	 	<strong>Warning!</strong> Better check yourself, you're <a href="#" class="alert-link">not looking too good</a>.
+	</div>
+</div>
+
+{% endblock %}
+
+{% block notificationSucess %}
+
+<div class="notification">
+	<div class="alert alert-success" role="alert">
+  		<strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+	</div>
+</div>
+
+{% endblock %}
+
+{% block notificationDanger %}
+
+<div class="notification">
+	<div class="alert alert-danger" role="alert">
+  	<strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+	</div>
+</div>
+
+{% endblock  %}
+
+
+
+{% block jQueryNotification %}
+
+
+
+{% endblock %}
