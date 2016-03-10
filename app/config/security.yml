@@ -13,10 +13,6 @@ security:
 
         # Le super admin a, en plus, la possibilité de changer de role
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-    
-    # Gestion des droits sur l'url par role
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
         
     # Gestion du provider de comptes
     providers:
@@ -29,15 +25,12 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        # Désactive l'authentification pour la page d'index, de login, et d'inscription
-        main_login:
-            pattern: ^/(|login|register(|/))$
-            anonymous: true
 
         # Active l'authentification pour le reste du site
         main:
             pattern: ^
-            anonymous: false
+            anonymous: true # Ici, on laisse les droits
+            security: true
             provider:  providerLoadFromBdd
             logout: true
             # Redirection vers le formulaire de connexion
@@ -47,3 +40,11 @@ security:
             logout:
                 path:       /logout
                 target:     /
+
+    # Gestion des droits sur l'url par role
+    access_control:
+        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register(|/)$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^, roles: IS_AUTHENTICATED_REMEMBERED } # On ferme l'acces au reste du site
