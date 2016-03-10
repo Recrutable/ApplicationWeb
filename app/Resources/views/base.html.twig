@@ -61,8 +61,19 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+{% block notificationInfos %}
+{% endblock %}
+{% block notificationSucess %}
+{% endblock %}
+{% block notificationDanger %}
+{% endblock %}
+{% block notificationWarning %}
+{% endblock %}
+
 {% block body %}
 {% endblock %}
+
+
 
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
