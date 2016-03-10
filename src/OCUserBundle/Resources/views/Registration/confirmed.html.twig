@@ -1,0 +1,10 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    {# Redirection vers le formulaire complementaire #}
+    {{ render(controller('OCUserBundle:FinishRegister:setRoles')) }}
+{% endblock fos_user_content %}
+
