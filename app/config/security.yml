@@ -31,7 +31,7 @@ security:
             security: false
         # Désactive l'authentification pour la page d'index, de login, et d'inscription
         main_login:
-            pattern: ^/(|login)$
+            pattern: ^/(|login|register(|/))$
             anonymous: true
 
         # Active l'authentification pour le reste du site
@@ -47,6 +47,3 @@ security:
             logout:
                 path:       /logout
                 target:     /
-
-    access_control:
-            - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
