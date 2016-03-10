@@ -2,23 +2,48 @@
 # http://symfony.com/doc/current/book/security.html
 security:
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-    providers:
-        in_memory:
-            memory: ~
+    # L'encodage des password
+    encoders:
+        OCUserBundle\Entity\User: sha512
+    
+    # la hierachie des roles
+    role_hierarchy:
+        # Un admin hérite des droits de chomeur et d'entreprise
+        ROLE_ADMIN:       [ROLE_CHOMEUR, ROLE_ENTREPRISE]
 
+        # Le super admin a, en plus, la possibilité de changer de role
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        
+    # Gestion du provider de comptes
+    providers:
+        providerLoadFromBdd:
+            id: fos_user.user_provider.username
+
+    # Gestion de l'authentification
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
+        # Désactive l'authentification pour les assets et le profiler
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        # Active l'authentification pour le reste du site
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            pattern: ^
+            anonymous: true # Ici, on laisse les droits
+            security: true
+            provider:  providerLoadFromBdd
+            logout: true
+            # Redirection vers le formulaire de connexion
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:
+                path:       /logout
+                target:     /
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    # Gestion des droits sur l'url par role
+    access_control:
+        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register(|/)$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^, roles: IS_AUTHENTICATED_REMEMBERED } # On ferme l'acces au reste du site

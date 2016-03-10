@@ -42,11 +42,13 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "braincrafted/bootstrap-bundle": "dev-master",
         "twitter/bootstrap": "^3.0",
-        "jquery/jquery": "1.9.*"
+        "jquery/jquery": "1.9.*",
+        "friendsofsymfony/user-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "scripts": {
         "post-install-cmd": [
