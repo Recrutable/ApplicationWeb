@@ -6,20 +6,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use OCUserBundle\Entity\Chomeur;
-use OCUserBundle\Form\ChomeurType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+use OCUserBundle\Entity\Chomeur;
+use OCUserBundle\Form\ChomeurType;
 /**
  * Chomeur controller.
  *
  * @Route("/profile_usr")
  * @Security("has_role('ROLE_CHOMEUR')")
  */
-class ChomeurController extends Controller
+class ChomeurController extends UserController
 {
     /**
-     * Liste de tous les chomeurs, (Zone Admine)
+     * Liste de tous les chomeurs, (Zone Admin)
      *
      * @Route("/", name="profile_usr_index")
      * @Method("GET")
@@ -51,6 +52,7 @@ class ChomeurController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            // On passe le user
             $chomeur->setUser($this->getUser());
             $em->persist($chomeur);
             $em->flush();
@@ -165,15 +167,4 @@ class ChomeurController extends Controller
             ;
     }
 
-    /**
-     * Verfie si le user passé est le user en cours, ou que le user en cours est un admin
-     * @param $user
-     * @throws AccessDeniedException
-     */
-    private function verifIsUserOrAdmin($user)
-    {
-        if($this->getUser() !== $user && !in_array('ROLE_ADMIN',$this->getUser()->getRoles())) {
-            throw new AccessDeniedException();
-        }
-    }
 }
