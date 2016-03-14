@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questionnaires list</h1>
+    <div class="container jumbotron">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Domaine</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionnaire in questionnaires %}
+            <tr>
+                <td><a href="{{ path('Qcm_show', { 'id': questionnaire.id }) }}">{{ questionnaire.id }}</a></td>
+                <td>{{ questionnaire.nom }}</td>
+                <td>{{ questionnaire.domaine }}</td>
+                <td>{{ questionnaire.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('Qcm_show', { 'id': questionnaire.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('Qcm_edit', { 'id': questionnaire.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('Qcm_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+    </div>
+{% endblock %}

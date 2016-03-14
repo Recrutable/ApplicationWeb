@@ -1,0 +1,13 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}QcmBundle:GestionQcm:index{% endblock %}
+
+{% block body %}
+	<div class="container jumbotron">
+		{{ form_start(Form, {'method': 'post', 'action': path('GestionQuestionnaires')})}}
+		{{ form_widget(Form)}}
+		<input class="btn btn-submit" type="submit" name="valider">
+		{{ form_end(Form)}}
+	</div>
+{% endblock %}
+
