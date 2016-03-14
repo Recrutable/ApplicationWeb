@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Entreprise list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entreprise in entreprises %}
+            <tr>
+                <td><a href="{{ path('profile_ent_show', { 'id': entreprise.id }) }}">{{ entreprise.id }}</a></td>
+                <td>{{ entreprise.description }}</td>
+                <td>{{ entreprise.nom }}</td>
+                <td>{{ entreprise.adresse }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('profile_ent_show', { 'id': entreprise.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('profile_ent_edit', { 'id': entreprise.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('profile_ent_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

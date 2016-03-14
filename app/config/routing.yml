@@ -1,3 +1,7 @@
+oc_user_entreprise:
+    resource: "@OCUserBundle/Controller/EntrepriseController.php"
+    type:     annotation
+
 qcm:
     resource: "@QcmBundle/Controller/"
     type:     annotation
