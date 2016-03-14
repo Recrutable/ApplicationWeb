@@ -1,3 +1,8 @@
+qcm:
+    resource: "@QcmBundle/Controller/"
+    type:     annotation
+    prefix: /Qcm
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
