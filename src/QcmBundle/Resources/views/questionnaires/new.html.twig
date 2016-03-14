@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Questionnaires creation</h1>
-
+    <div class="container jumbotron">
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
@@ -13,4 +13,5 @@
             <a href="{{ path('Qcm_index') }}">Back to the list</a>
         </li>
     </ul>
+    </div>
 {% endblock %}

@@ -23,7 +23,7 @@ class QuestionnairesController extends Controller
         $repo = $this->getDoctrine()->getManager()->getRepository('QcmBundle:Questionnaires');
         $listQuestionnaires = $repo->findAll();
 
-        return $this->render('questionnaires/index.html.twig', array(
+        return $this->render('QcmBundle:Questionnaires:index.html.twig', array(
             'questionnaires' => $listQuestionnaires,
         ));
     }
@@ -48,7 +48,7 @@ class QuestionnairesController extends Controller
             return $this->redirectToRoute('Qcm_show', array('id' => $questionnaire->getId()));
         }
 
-        return $this->render('questionnaires/new.html.twig', array(
+        return $this->render('QcmBundle:Questionnaires:new.html.twig', array(
             'questionnaire' => $questionnaire,
             'form' => $form->createView(),
         ));
@@ -64,7 +64,7 @@ class QuestionnairesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($questionnaire);
 
-        return $this->render('questionnaires/show.html.twig', array(
+        return $this->render('QcmBundle:Questionnaires:show.html.twig', array(
             'questionnaire' => $questionnaire,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -90,7 +90,7 @@ class QuestionnairesController extends Controller
             return $this->redirectToRoute('Qcm_edit', array('id' => $questionnaire->getId()));
         }
 
-        return $this->render('questionnaires/edit.html.twig', array(
+        return $this->render('QcmBundle:Questionnaires:edit.html.twig', array(
             'questionnaire' => $questionnaire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
