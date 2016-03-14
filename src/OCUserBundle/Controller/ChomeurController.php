@@ -110,7 +110,7 @@ class ChomeurController extends UserController
             $em->flush();
 
             // Et on redirige
-            return $this->redirectToRoute('profile_usr_edit', array('id' => $chomeur->getId()));
+            return $this->redirectToRoute('profile_usr_show', array('id' => $chomeur->getId()));
         }
 
         // On retourne la vue

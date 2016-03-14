@@ -113,7 +113,7 @@ class EntrepriseController extends UserController
             $em->flush();
 
             // Et on redirige
-            return $this->redirectToRoute('profile_ent_edit', array('id' => $entreprise->getId()));
+            return $this->redirectToRoute('profile_ent_show', array('id' => $entreprise->getId()));
         }
 
         // On retourne la vue
