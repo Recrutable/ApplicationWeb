@@ -8,19 +8,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use OCUserBundle\Entity\Chomeur;
 use OCUserBundle\Form\ChomeurType;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * Chomeur controller.
  *
  * @Route("/profile_usr")
+ * @Security("has_role('ROLE_CHOMEUR')")
  */
 class ChomeurController extends Controller
 {
     /**
-     * Lists all Chomeur entities.
+     * Liste de tous les chomeurs, (Zone Admine)
      *
      * @Route("/", name="profile_usr_index")
      * @Method("GET")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -34,7 +38,7 @@ class ChomeurController extends Controller
     }
 
     /**
-     * Creates a new Chomeur entity.
+     * Crée un nouveau chomeur
      *
      * @Route("/new", name="profile_usr_new")
      * @Method({"GET", "POST"})
@@ -47,6 +51,7 @@ class ChomeurController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $chomeur->setUser($this->getUser());
             $em->persist($chomeur);
             $em->flush();
 
@@ -60,15 +65,20 @@ class ChomeurController extends Controller
     }
 
     /**
-     * Finds and displays a Chomeur entity.
+     * Affiche le profil du chomeur {id}
      *
      * @Route("/{id}", name="profile_usr_show")
      * @Method("GET")
      */
     public function showAction(Chomeur $chomeur)
     {
+        // On vérifie les droits
+        $this->verifIsUserOrAdmin($chomeur->getUser());
+
+        // On crée le form de supression
         $deleteForm = $this->createDeleteForm($chomeur);
 
+        // On rend la vue
         return $this->render('OCUserBundle:Chomeur:show.html.twig', array(
             'chomeur' => $chomeur,
             'delete_form' => $deleteForm->createView(),
@@ -76,25 +86,32 @@ class ChomeurController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Chomeur entity.
+     * Edition du chomeur {id}
      *
      * @Route("/{id}/edit", name="profile_usr_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Chomeur $chomeur)
     {
+        // On vérifie les droits de la demande
+        $this->verifIsUserOrAdmin($chomeur->getUser());
+
+        // On récupere les forms
         $deleteForm = $this->createDeleteForm($chomeur);
         $editForm = $this->createForm('OCUserBundle\Form\ChomeurType', $chomeur);
         $editForm->handleRequest($request);
 
+        // Si validation, on update
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($chomeur);
             $em->flush();
 
+            // Et on redirige
             return $this->redirectToRoute('profile_usr_edit', array('id' => $chomeur->getId()));
         }
 
+        // On retourne la vue
         return $this->render('OCUserBundle:Chomeur:edit.html.twig', array(
             'chomeur' => $chomeur,
             'edit_form' => $editForm->createView(),
@@ -103,23 +120,33 @@ class ChomeurController extends Controller
     }
 
     /**
-     * Deletes a Chomeur entity.
+     * Suppression du chomeur {id}
      *
      * @Route("/{id}", name="profile_usr_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Chomeur $chomeur)
     {
+        // On vérifie les droits
+        $this->verifIsUserOrAdmin($chomeur->getUser());
+
+        // On crée le form de supression
         $form = $this->createDeleteForm($chomeur);
         $form->handleRequest($request);
 
+        // Si c'est OK, on suprime
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($chomeur);
             $em->flush();
         }
 
-        return $this->redirectToRoute('profile_usr_index');
+        // On redirige sur la page d'index si c'est un admin, sur la page de logout sinon
+        $routingRedirect = 'fos_user_security_logout';
+        if(in_array('ROLE_ADMIN',$this->getUser()->getRoles())) {
+            $routingRedirect = 'profile_usr_index';
+        }
+        return $this->redirectToRoute($routingRedirect);
     }
 
     /**
@@ -136,5 +163,17 @@ class ChomeurController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+
+    /**
+     * Verfie si le user passé est le user en cours, ou que le user en cours est un admin
+     * @param $user
+     * @throws AccessDeniedException
+     */
+    private function verifIsUserOrAdmin($user)
+    {
+        if($this->getUser() !== $user && !in_array('ROLE_ADMIN',$this->getUser()->getRoles())) {
+            throw new AccessDeniedException();
+        }
     }
 }
