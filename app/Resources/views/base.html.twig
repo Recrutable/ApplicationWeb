@@ -30,7 +30,7 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}">Retable</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}">Recrutable</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -41,7 +41,7 @@
             <form class="navbar-form navbar-right" role="search">
                 {% if app.user is not null %}
                     <span class="text-muted">
-                        Bonjour {{ app.user.username }}
+                        Bonjour {{ app.user.username | capitalize }}
                     </span>
                     <span>
                         <a class="btn btn-success" href="{{ path('fos_user_security_logout') }}">

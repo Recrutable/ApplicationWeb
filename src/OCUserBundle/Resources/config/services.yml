@@ -1,4 +1,6 @@
 services:
-#    oc_user.example:
-#        class: OCUserBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+  # Surcharge du formulaire d'inscription
+  ocuserbudle.form.registration:
+      class: OCUserBundle\Form\Type\RegistrationFormType
+      tags:
+          - { name: form.type, alias: app_user_registration }
