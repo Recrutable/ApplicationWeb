@@ -1,3 +1,7 @@
+oc_user_chomeur:
+    resource: "@OCUserBundle/Controller/ChomeurController.php"
+    type:     annotation
+
 oc_user_entreprise:
     resource: "@OCUserBundle/Controller/EntrepriseController.php"
     type:     annotation
