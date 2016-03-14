@@ -1,16 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Chomeur creation</h1>
+    <h3 class="popover-title">Création du profile</h3>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" class="btn btn-success pull-right" value="Valider" />
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('profile_usr_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

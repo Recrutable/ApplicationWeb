@@ -3,8 +3,9 @@
 {% block body %}
     <h1>Chomeur list</h1>
 
-    <table>
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
@@ -13,29 +14,30 @@
                 <th>Presentation</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for chomeur in chomeurs %}
-            <tr>
-                <td><a href="{{ path('profile_usr_show', { 'id': chomeur.id }) }}">{{ chomeur.id }}</a></td>
-                <td>{{ chomeur.nom }}</td>
-                <td>{{ chomeur.prenom }}</td>
-                <td>{% if chomeur.birthday %}{{ chomeur.birthday|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ chomeur.presentation }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('profile_usr_show', { 'id': chomeur.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('profile_usr_edit', { 'id': chomeur.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for chomeur in chomeurs %}
+                <tr>
+                    <td><a href="{{ path('profile_usr_show', { 'id': chomeur.id }) }}">{{ chomeur.id }}</a></td>
+                    <td>{{ chomeur.nom }}</td>
+                    <td>{{ chomeur.prenom }}</td>
+                    <td>{% if chomeur.birthday %}{{ chomeur.birthday|date('Y-m-d') }}{% endif %}</td>
+                    <td>{{ chomeur.presentation }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('profile_usr_show', { 'id': chomeur.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('profile_usr_edit', { 'id': chomeur.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <ul>
         <li>
