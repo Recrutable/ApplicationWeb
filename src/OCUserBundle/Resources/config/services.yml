@@ -4,9 +4,3 @@ services:
       class: OCUserBundle\Form\Type\RegistrationFormType
       tags:
           - { name: form.type, alias: app_user_registration }
-
-  # Sauveagrdes supplémentaire a la validation
-  ocuserbudle.register_listener:
-      class: OCUserBundle\EventListener\RegisterListener
-      tags:
-          - { name: kernel.event_subscriber }

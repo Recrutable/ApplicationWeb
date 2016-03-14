@@ -14,9 +14,10 @@ class RegistrationFormType extends AbstractType
     {
         parent::buildForm($builder, $options);
         $builder->add('roles', ChoiceType::class, array(
-            'choices' => array('ROLE_ENTREPRISE'=>'Entreprise','ROLE_CHOMEUR'=>'Utilisateur'),
+            'choices' => array('Entreprise'=>'ROLE_ENTREPRISE','Utilisateur'=>'ROLE_CHOMEUR'),
             'choices_as_values' => true,
             'multiple' => true,
+            'expanded'=> false,
         ));
     }
 
