@@ -1,18 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Entreprise</h1>
+    <h2 class="popover-title">Profil de l'entreprise</h2>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entreprise.id }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ entreprise.description }}</td>
-            </tr>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tbody>
             <tr>
                 <th>Nom</th>
                 <td>{{ entreprise.nom }}</td>
@@ -21,19 +14,22 @@
                 <th>Adresse</th>
                 <td>{{ entreprise.adresse }}</td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <th>Description</th>
+                <td>{{ entreprise.description }}</td>
+            </tr>
 
-    <ul>
-        <li>
-            <a href="{{ path('profile_ent_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('profile_ent_edit', { 'id': entreprise.id }) }}">Edit</a>
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="list-inline pull-right">
+        <li >
+            <a class="btn btn-info" href="{{ path('profile_ent_edit', { 'id': entreprise.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input class="btn btn-warning" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
