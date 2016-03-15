@@ -12,23 +12,23 @@ use QcmBundle\Form\QuestionsType;
 /**
  * Questions controller.
  *
- * @Route("/questions")
+ * 
  */
 class QuestionsController extends Controller
 {
     /**
      * Lists all Questions entities.
      *
-     * @Route("/", name="questions_index")
+     * @Route("questions/show", name="questions_index")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $questions = $em->getRepository('QcmBundle:Questions')->findAll();
+        $questions= $em->getRepository('QcmBundle:Questions')->findAll();
 
-        return $this->render('questions/index.html.twig', array(
+        return $this->render('QcmBundle:Questions:index.html.twig', array(
             'questions' => $questions,
         ));
     }
@@ -36,7 +36,7 @@ class QuestionsController extends Controller
     /**
      * Creates a new Questions entity.
      *
-     * @Route("/new", name="questions_new")
+     * @Route("questions/new", name="questions_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -53,7 +53,7 @@ class QuestionsController extends Controller
             return $this->redirectToRoute('questions_show', array('id' => $question->getId()));
         }
 
-        return $this->render('questions/new.html.twig', array(
+        return $this->render('QcmBundle:Questions:new.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
         ));

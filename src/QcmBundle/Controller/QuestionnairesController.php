@@ -8,8 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use QcmBundle\Entity\Questionnaires;
 use QcmBundle\Form\QuestionnairesType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
+/**
+ * @Security("has_role('ROLE_ENTREPRISE')")
+ */
 class QuestionnairesController extends Controller
 {
     /**

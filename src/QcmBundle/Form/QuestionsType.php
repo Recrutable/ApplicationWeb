@@ -18,7 +18,6 @@ class QuestionsType extends AbstractType
             ->add('question')
             ->add('reponse')
             ->add('bonneReponse')
-            ->add('idQuestionnaire')
         ;
     }
     
