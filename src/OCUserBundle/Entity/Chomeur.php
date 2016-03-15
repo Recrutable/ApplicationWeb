@@ -55,6 +55,13 @@ class Chomeur
     private $user;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="CV", type="text")
+     */
+    private $CV;
+
+    /**
      * Get id
      *
      * @return int
@@ -162,10 +169,12 @@ class Chomeur
 
     /**
      * @param $User
+     * @return $this
      */
     public function setUser($User)
     {
         $this->user = $User;
+        return $this;
     }
 
     /**
@@ -174,5 +183,23 @@ class Chomeur
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param $CV
+     * @return $this
+     */
+    public function setCV($CV)
+    {
+        $this->CV = $CV;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCV()
+    {
+        return $this->CV;
     }
 }

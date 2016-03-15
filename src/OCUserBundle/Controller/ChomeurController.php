@@ -47,7 +47,14 @@ class ChomeurController extends UserController
     public function newAction(Request $request)
     {
         $chomeur = new Chomeur();
-        $form = $this->createForm('OCUserBundle\Form\ChomeurType', $chomeur);
+        $form = $this->createForm(
+            'OCUserBundle\Form\ChomeurType',
+            $chomeur,
+            array(
+                'action' => $this->generateUrl('profile_usr_new'),
+            )
+        );
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -51,7 +51,13 @@ class EntrepriseController extends UserController
     {
         // On crée le form
         $entreprise = new Entreprise();
-        $form = $this->createForm('OCUserBundle\Form\EntrepriseType', $entreprise);
+        $form = $this->createForm(
+            'OCUserBundle\Form\EntrepriseType',
+            $entreprise,
+            array(
+                'action' => $this->generateUrl('profile_ent_new'),
+            )
+        );
         $form->handleRequest($request);
 
         // Si c'est ok, on insere

@@ -1,10 +1,16 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
-
 {% trans_default_domain 'FOSUserBundle' %}
-
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    <h2> Derniere étape : </h2>
     {# Redirection vers le formulaire complementaire #}
-    La gestion du profile viendra ici
+
+    {% if is_granted('ROLE_CHOMEUR') %}
+        {{ render(controller("OCUserBundle:Chomeur:new")) }}
+    {% elseif is_granted('ROLE_ENTREPRISE') %}
+        {{ render(controller("OCUserBundle:Entreprise:new")) }}
+    {% endif %}
+    {# {% render "OCUserBundle:Entreprise:new" %} #}
 {% endblock fos_user_content %}
+
+
 
