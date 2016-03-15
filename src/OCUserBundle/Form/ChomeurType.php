@@ -18,7 +18,8 @@ class ChomeurType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('birthday')
-            ->add('presentation');
+            ->add('presentation')
+            ->add('CV');
     }
     
     /**
