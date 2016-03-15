@@ -1,3 +1,8 @@
+candidatures:
+    resource: "@CandidaturesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 oc_user_chomeur:
     resource: "@OCUserBundle/Controller/ChomeurController.php"
     type:     annotation
