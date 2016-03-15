@@ -18,6 +18,7 @@ class RegistrationFormType extends AbstractType
             'choices_as_values' => true,
             'multiple' => true,
             'expanded'=> false,
+            'required' => true,
         ));
         $builder->add('tel');
     }
