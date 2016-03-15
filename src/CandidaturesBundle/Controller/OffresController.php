@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CandidaturesBundle\Entity\Offres;
 use CandidaturesBundle\Form\OffresType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Offres controller.
@@ -104,7 +105,7 @@ class OffresController extends Controller
             $em->persist($offre);
             $em->flush();
 
-            return $this->redirectToRoute('offres_edit', array('id' => $offre->getId()));
+            return $this->redirectToRoute('offres_show', array('id' => $offre->getId()));
         }
 
         return $this->render('CandidaturesBundle:offres:edit.html.twig', array(
@@ -147,9 +148,6 @@ class OffresController extends Controller
      */
     private function createDeleteForm(Offres $offre)
     {
-        // Verification des droits
-        $this->isEntrperiseProprietaireOrAdmin($offre->getEntreprise()->getUser());
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('offres_delete', array('id' => $offre->getId())))
             ->setMethod('DELETE')

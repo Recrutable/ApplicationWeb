@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Offres creation</h1>
+    <h3>Création de l'offre</h3>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input class="pull-right btn btn-success" type="submit" value="Valider" />
     {{ form_end(form) }}
 
-    <ul>
+    <ul class="pull-right list-inline">
         <li>
-            <a href="{{ path('offres_index') }}">Back to the list</a>
+            <a class="btn btn-default" href="{{ path('offres_index') }}">Retour à la liste des offres</a>
         </li>
     </ul>
 {% endblock %}

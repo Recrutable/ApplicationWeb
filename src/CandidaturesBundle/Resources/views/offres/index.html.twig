@@ -1,30 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Offres list</h1>
+    <h3>Liste des offres</h3>
 
-    <table>
+    <table class="table table-hover">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for offre in offres %}
             <tr>
-                <td><a href="{{ path('offres_show', { 'id': offre.id }) }}">{{ offre.id }}</a></td>
                 <td>{{ offre.titre }}</td>
                 <td>{{ offre.description }}</td>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                         <li>
-                            <a href="{{ path('offres_show', { 'id': offre.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('offres_edit', { 'id': offre.id }) }}">edit</a>
+                            <a class="btn btn-info" href="{{ path('offres_show', { 'id': offre.id }) }}">Consulter</a>
                         </li>
                     </ul>
                 </td>
@@ -33,9 +28,11 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('offres_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    {% if is_granted('ROLE_ENTREPRISE') %}
+        <ul class="list-inline pull-right">
+            <li>
+                <a class="btn btn-success" href="{{ path('offres_new') }}">Creer une offre</a>
+            </li>
+        </ul>
+    {% endif %}
 {% endblock %}

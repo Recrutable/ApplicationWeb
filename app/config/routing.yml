@@ -1,3 +1,7 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
 candidatures:
     resource: "@CandidaturesBundle/Controller/"
     type:     annotation
@@ -15,10 +19,6 @@ qcm:
     resource: "@QcmBundle/Controller/"
     type:     annotation
     prefix: /Qcm
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
     
 # Configuration des pages FOSUserBundle
 fos_user_security:
