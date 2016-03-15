@@ -5,13 +5,9 @@
     <div class="container jumbotron">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="Créer" class="btn btn-success" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('Qcm_index') }}">Back to the list</a>
-        </li>
-    </ul>
+            <a href="{{ path('Qcm_index') }}" class="btn btn-info">Back to the list</a>
     </div>
 {% endblock %}

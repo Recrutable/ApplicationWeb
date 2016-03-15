@@ -43,7 +43,6 @@ class Questionnaires
      */
     private $type;
 
-
     /**
      * Get id
      *
