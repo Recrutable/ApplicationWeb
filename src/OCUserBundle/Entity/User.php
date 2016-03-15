@@ -20,5 +20,20 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(name="tel", type="string", length=20)
+     */
+    protected $tel;
+
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    public function setTel($Tel)
+    {
+        $this->tel = $Tel;
+    }
 }
 

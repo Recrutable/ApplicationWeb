@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="popover-title">Mon profil</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ chomeur.nom  | escape }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ chomeur.prenom  | escape }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{% if chomeur.birthday %}{{ chomeur.birthday|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Presentation</th>
+                <td>{{ chomeur.presentation | escape }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="list-inline pull-right">
+        <li >
+            <a class="btn btn-info" href="{{ path('profile_usr_edit', { 'id': chomeur.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input class="btn btn-warning" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

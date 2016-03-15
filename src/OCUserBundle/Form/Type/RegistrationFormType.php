@@ -19,6 +19,7 @@ class RegistrationFormType extends AbstractType
             'multiple' => true,
             'expanded'=> false,
         ));
+        $builder->add('tel');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
