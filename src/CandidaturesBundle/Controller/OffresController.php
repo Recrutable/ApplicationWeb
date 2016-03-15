@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CandidaturesBundle\Entity\Offres;
 use CandidaturesBundle\Form\OffresType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
  * Offres controller.
  *
@@ -37,6 +39,7 @@ class OffresController extends Controller
      *
      * @Route("/new", name="offres_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ENTREPRISE')")
      */
     public function newAction(Request $request)
     {
@@ -85,9 +88,13 @@ class OffresController extends Controller
      *
      * @Route("/{id}/edit", name="offres_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ENTREPRISE')")
      */
     public function editAction(Request $request, Offres $offre)
     {
+        // Verification des droits
+        $this->isEntrperiseProprietaireOrAdmin($offre->getEntreprise()->getUser());
+
         $deleteForm = $this->createDeleteForm($offre);
         $editForm = $this->createForm('CandidaturesBundle\Form\OffresType', $offre);
         $editForm->handleRequest($request);
@@ -112,9 +119,13 @@ class OffresController extends Controller
      *
      * @Route("/{id}", name="offres_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_ENTREPRISE')")
      */
     public function deleteAction(Request $request, Offres $offre)
     {
+        // Verification des droits
+        $this->isEntrperiseProprietaireOrAdmin($offre->getEntreprise()->getUser());
+
         $form = $this->createDeleteForm($offre);
         $form->handleRequest($request);
 
@@ -131,15 +142,30 @@ class OffresController extends Controller
      * Creates a form to delete a Offres entity.
      *
      * @param Offres $offre The Offres entity
-     *
+     * @Security("has_role('ROLE_ENTREPRISE')")
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Offres $offre)
     {
+        // Verification des droits
+        $this->isEntrperiseProprietaireOrAdmin($offre->getEntreprise()->getUser());
+
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('offres_delete', array('id' => $offre->getId())))
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+
+    /**
+     * Verifie que l'utilisateur passé est l'utilisateur en cours, ou que l'utilisateur en cours est un admin
+     * @param $user
+     * @throws AccessDeniedException
+     */
+    private function isEntrperiseProprietaireOrAdmin($user)
+    {
+        if($this->getUser() !== $user && !in_array('ROLE_ADMIN',$this->getUser()->getRoles())) {
+            throw new AccessDeniedException();
+        }
     }
 }
