@@ -124,5 +124,14 @@ class Questionnaires
     {
         return $this->type;
     }
+
+    /**
+     * Retourne le nom du formulaire
+     * @return string
+     */
+    public function __toString()
+    {
+        return "{$this->getDomaine()} - {$this->getType()} - {$this->getNom()}";
+    }
 }
 

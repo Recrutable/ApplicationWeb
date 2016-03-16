@@ -1,3 +1,12 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+candidatures:
+    resource: "@CandidaturesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 oc_user_chomeur:
     resource: "@OCUserBundle/Controller/ChomeurController.php"
     type:     annotation
@@ -10,10 +19,6 @@ qcm:
     resource: "@QcmBundle/Controller/"
     type:     annotation
     prefix: /Qcm
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
     
 # Configuration des pages FOSUserBundle
 fos_user_security:
