@@ -1,36 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questions list</h1>
+    <h3>Liste des questions</h3>
 
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Question</th>
-                <th>Reponsea</th>
-                <th>Reponseb</th>
-                <th>Reponsec</th>
-                <th>Bonnereponse</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for question in questions %}
             <tr>
-                <td><a href="{{ path('questions_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
                 <td>{{ question.question }}</td>
-                <td>{{ question.reponseA }}</td>
-                <td>{{ question.reponseB }}</td>
-                <td>{{ question.reponseC }}</td>
-                <td>{{ question.bonneReponse }}</td>
                 <td>
-                    <ul>
+                    <ul class="list-inline pull-right">
                         <li>
-                            <a href="{{ path('questions_show', { 'id': question.id }) }}">show</a>
+                            <a class="btn btn-info" href="{{ path('questions_show', { 'id': question.id,id_questionnaires: questionnaire.id}) }}">Consulter</a>
                         </li>
                         <li>
-                            <a href="{{ path('questions_edit', { 'id': question.id }) }}">edit</a>
+                            <a class="btn btn-warning" href="{{ path('questions_edit', { 'id': question.id,id_questionnaires: questionnaire.id}) }}">Modifier</a>
                         </li>
                     </ul>
                 </td>
@@ -39,9 +29,9 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline pull-right">
         <li>
-            <a href="{{ path('questions_new'), }}">Create a new entry</a>
+             <a class="btn btn-success" href="{{ path('questions_new',{id_questionnaires: questionnaire.id}) }}">Nouvelles questions</a>
         </li>
     </ul>
 {% endblock %}

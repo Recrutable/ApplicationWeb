@@ -1,47 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questions</h1>
+    <h3>Question</h3>
 
-    <table>
+    <table class="table-hover table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ question.id }}</td>
-            </tr>
-            <tr>
-                <th>Question</th>
-                <td>{{ question.question }}</td>
-            </tr>
-            <tr>
-                <th>Reponsea</th>
-                <td>{{ question.reponseA }}</td>
-            </tr>
-            <tr>
-                <th>Reponseb</th>
-                <td>{{ question.reponseB }}</td>
-            </tr>
-            <tr>
-                <th>Reponsec</th>
-                <td>{{ question.reponseC }}</td>
-            </tr>
-            <tr>
-                <th>Bonnereponse</th>
-                <td>{{ question.bonneReponse }}</td>
-            </tr>
+        <tr>
+            <th>Question</th>
+            <td>{{ question.question }}</td>
+        </tr>
+        <tr>
+            <th>Reponse A</th>
+            <td>{{ question.reponseA }}</td>
+        </tr>
+        <tr>
+            <th>Reponse B</th>
+            <td>{{ question.reponseB }}</td>
+        </tr>
+        <tr>
+            <th>Reponse C</th>
+            <td>{{ question.reponseC }}</td>
+        </tr>
+        <tr>
+            <th>Bonne reponse</th>
+            <td>{{ question.bonneReponse }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline pull-right">
         <li>
-            <a href="{{ path('questions_index') }}">Back to the list</a>
+            <a class="btn btn-default" href="{{ path('questions_index',{ 'id': question.id , id_questionnaires: questionnaire.id }) }}">
+                Retour a la liste des questions
+            </a>
         </li>
         <li>
-            <a href="{{ path('questions_edit', { 'id': question.id }) }}">Edit</a>
+            <a class="btn btn-warning" href="{{ path('questions_edit', { 'id': question.id , id_questionnaires: questionnaire.id }) }}">
+                Modifier
+            </a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input class="btn btn-danger" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
     </ul>

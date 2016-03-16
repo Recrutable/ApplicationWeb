@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questions creation</h1>
+    <h3>Ajouter une question</h3>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Create" />
+    <input class="btn btn-success pull-right" type="submit" value="Ajouter" />
     {{ form_end(form) }}
-    <a class="btn btn-default" href="{{ path('Qcm_show', {id: id_questionnaire } ) }}" >
-        Retourner au questionnaire
-    </a>
 
-    <ul>
+    <ul class="list-inline pull-right">
         <li>
-            <a href="{{ path('questions_index') }}">Back to the list</a>
+            <a class="btn btn-info" href="{{ path('questions_index',{id_questionnaires:questionnaire.id}) }}">Retourner aux questions</a>
+        </li>
+        <li>
+            <a class="btn btn-default" href="{{ path('Qcm_show', {id: questionnaire.id } ) }}" >
+                Retourner au questionnaire
+            </a>
         </li>
     </ul>
 {% endblock %}
