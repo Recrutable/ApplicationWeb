@@ -38,8 +38,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('offres_index') }}">Voir les offres<span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="#">Répondre à nos questionnaires<span class="sr-only">(current)</span></a></li>
+                {% if is_granted('ROLE_ENTREPRISE') %}
+                    <li class="active"><a href="{{ path('offres_index') }}">Gerer mes offres<span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="{{ path('Qcm_index') }}">Gerer mes questionnaires<span class="sr-only">(current)</span></a></li>
+                {% elseif is_granted('ROLE_CHOMEUR') %}
+                    <li class="active"><a href="{{ path('offres_index') }}">Voir les offres<span class="sr-only">(current)</span></a></li>
+                {% endif %}
+
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 {% if app.user is not null %}

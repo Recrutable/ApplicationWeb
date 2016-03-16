@@ -104,7 +104,7 @@ class QuestionnairesController extends Controller
             $em->persist($questionnaire);
             $em->flush();
 
-            return $this->redirectToRoute('Qcm_edit', array('id' => $questionnaire->getId()));
+            return $this->redirectToRoute('Qcm_show', array('id' => $questionnaire->getId()));
         }
 
         return $this->render('QcmBundle:Questionnaires:edit.html.twig', array(

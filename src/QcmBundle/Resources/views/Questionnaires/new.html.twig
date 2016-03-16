@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questionnaires creation</h1>
-    <div class="container jumbotron">
+    <h3>Création</h3>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Créer" class="btn btn-info" />
+    {{ form_widget(form) }}
+    <input class="btn btn-success pull-right" type="submit" value="Ajouter" />
     {{ form_end(form) }}
-            <a href="{{ path('Qcm_index') }}" class="btn btn-danger">Back to the list</a>
-    </div>
+    <a href="{{ path('Qcm_index') }}" class="btn btn-danger pull-right">Retour</a>
 {% endblock %}
