@@ -4,9 +4,12 @@
     <h1>Questions creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
     {{ form_end(form) }}
+    <a class="btn btn-default" href="{{ path('Qcm_show', {id: id_questionnaire } ) }}" >
+        Retourner au questionnaire
+    </a>
 
     <ul>
         <li>

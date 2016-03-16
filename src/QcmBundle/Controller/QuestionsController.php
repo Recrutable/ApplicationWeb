@@ -51,12 +51,14 @@ class QuestionsController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('questions_show', array('id' => $question->getId()));
+            // On reprend le formulaire
+            return $this->redirectToRoute('questions_new', array('id_questionnaire' => $id_questionnaire));
         }
 
         return $this->render('QcmBundle:questions:new.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
+            'id_questionnaire' => $id_questionnaire,
         ));
     }
 
