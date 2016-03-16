@@ -199,7 +199,7 @@ class Questions
         return $this->idQuestionnaire;
     }
 
-    public function setIdQuestionnaire()
+    public function setIdQuestionnaire($idQuestionnaire)
     {
         $this->idQuestionnaire = $idQuestionnaire;
         return $this;

@@ -138,8 +138,7 @@ class QuestionnairesController extends Controller
 
     public function ajoutQuestions()
     {
-        /* 
-            Lors du clique sur le boutons "Ajouter" on doit arrive sur la page new de questions
-        */
+
+        return $this->redirectToRoute('question_new');
     }
 }

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use QcmBundle\Entity\Questions;
+use QcmBundle\Entity\Questionnaires;
 use QcmBundle\Form\QuestionsType;
 
 /**
@@ -36,10 +37,10 @@ class QuestionsController extends Controller
     /**
      * Creates a new Questions entity.
      *
-     * @Route("questions/new", name="questions_new")
+     * @Route("questions/new/{id_questionnaire}", name="questions_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $id_questionnaire)
     {
         $question = new Questions();
         $form = $this->createForm('QcmBundle\Form\QuestionsType', $question);
@@ -47,6 +48,7 @@ class QuestionsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $question->setIdQuestionnaire($em->find('QcmBundle:Questionnaires',$id_questionnaire));
             $em->persist($question);
             $em->flush();
 
