@@ -16,7 +16,9 @@ class QuestionsType extends AbstractType
     {
         $builder
             ->add('question')
-            ->add('reponse')
+            ->add('reponseA')
+            ->add('reponseB')
+            ->add('reponseC')
             ->add('bonneReponse')
         ;
     }

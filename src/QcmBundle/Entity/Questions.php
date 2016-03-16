@@ -31,9 +31,23 @@ class Questions
     /**
      * @var string
      *
-     * @ORM\Column(name="reponse", type="string", length=255)
+     * @ORM\Column(name="reponseA", type="string", length=255)
      */
-    private $reponse;
+    private $reponseA;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reponseB", type="string", length=255)
+     */
+    private $reponseB;
+
+/**
+     * @var string
+     *
+     * @ORM\Column(name="reponseC", type="string", length=255)
+     */
+    private $reponseC;
 
     /**
      * @var string
@@ -90,9 +104,9 @@ class Questions
      *
      * @return Questions
      */
-    public function setReponse($reponse)
+    public function setReponseA($reponseA)
     {
-        $this->reponse = $reponse;
+        $this->reponseA = $reponseA;
 
         return $this;
     }
@@ -102,9 +116,57 @@ class Questions
      *
      * @return string
      */
-    public function getReponse()
+    public function getReponseA()
     {
-        return $this->reponse;
+        return $this->reponseA;
+    }
+
+    /**
+     * Set reponse
+     *
+     * @param string $reponse
+     *
+     * @return Questions
+     */
+    public function setReponseB($reponseB)
+    {
+        $this->reponseB = $reponseB;
+
+        return $this;
+    }
+
+    /**
+     * Get reponse
+     *
+     * @return string
+     */
+    public function getReponseB()
+    {
+        return $this->reponseB;
+    }
+
+    /**
+     * Set reponse
+     *
+     * @param string $reponse
+     *
+     * @return Questions
+     */
+    public function setReponseC($reponseC)
+    {
+        $this->reponseC = $reponseC;
+
+        return $this;
+    }
+
+    /**
+     * Get reponse
+     *
+     * @return string
+     */
+    public function getReponseC()
+    {
+        return $this->reponseC;
     }
 
     /**

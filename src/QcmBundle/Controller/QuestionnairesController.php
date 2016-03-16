@@ -135,4 +135,11 @@ class QuestionnairesController extends Controller
             ->getForm()
         ;
     }
+
+    public function ajoutQuestions()
+    {
+        /* 
+            Lors du clique sur le boutons "Ajouter" on doit arrive sur la page new de questions
+        */
+    }
 }
