@@ -8,7 +8,9 @@
             <tr>
                 <th>Id</th>
                 <th>Question</th>
-                <th>Reponse</th>
+                <th>Reponsea</th>
+                <th>Reponseb</th>
+                <th>Reponsec</th>
                 <th>Bonnereponse</th>
                 <th>Actions</th>
             </tr>
@@ -18,7 +20,9 @@
             <tr>
                 <td><a href="{{ path('questions_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
                 <td>{{ question.question }}</td>
-                <td>{{ question.reponse }}</td>
+                <td>{{ question.reponseA }}</td>
+                <td>{{ question.reponseB }}</td>
+                <td>{{ question.reponseC }}</td>
                 <td>{{ question.bonneReponse }}</td>
                 <td>
                     <ul>
@@ -37,7 +41,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('questions_new') }}">Create a new entry</a>
+            <a href="{{ path('questions_new'), }}">Create a new entry</a>
         </li>
     </ul>
 {% endblock %}

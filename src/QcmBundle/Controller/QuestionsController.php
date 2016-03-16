@@ -7,29 +7,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use QcmBundle\Entity\Questions;
-use QcmBundle\Entity\Questionnaires;
 use QcmBundle\Form\QuestionsType;
 
 /**
  * Questions controller.
  *
- * 
+ * @Route("/questions")
  */
 class QuestionsController extends Controller
 {
     /**
      * Lists all Questions entities.
      *
-     * @Route("questions/show", name="questions_index")
+     * @Route("/", name="questions_index")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $questions= $em->getRepository('QcmBundle:Questions')->findAll();
+        $questions = $em->getRepository('QcmBundle:Questions')->findAll();
 
-        return $this->render('QcmBundle:Questions:index.html.twig', array(
+        return $this->render('QcmBundle:questions:index.html.twig', array(
             'questions' => $questions,
         ));
     }
@@ -37,7 +36,7 @@ class QuestionsController extends Controller
     /**
      * Creates a new Questions entity.
      *
-     * @Route("questions/new/{id_questionnaire}", name="questions_new")
+     * @Route("/new/{id_questionnaire}", name="questions_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, $id_questionnaire)
@@ -55,7 +54,7 @@ class QuestionsController extends Controller
             return $this->redirectToRoute('questions_show', array('id' => $question->getId()));
         }
 
-        return $this->render('QcmBundle:Questions:new.html.twig', array(
+        return $this->render('QcmBundle:questions:new.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
         ));
@@ -71,7 +70,7 @@ class QuestionsController extends Controller
     {
         $deleteForm = $this->createDeleteForm($question);
 
-        return $this->render('questions/show.html.twig', array(
+        return $this->render('QcmBundle:questions:show.html.twig', array(
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -97,7 +96,7 @@ class QuestionsController extends Controller
             return $this->redirectToRoute('questions_edit', array('id' => $question->getId()));
         }
 
-        return $this->render('questions/edit.html.twig', array(
+        return $this->render('QcmBundle:questions:edit.html.twig', array(
             'question' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

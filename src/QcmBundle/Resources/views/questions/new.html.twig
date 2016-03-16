@@ -2,13 +2,15 @@
 
 {% block body %}
     <h1>Questions creation</h1>
-    
+
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Create" />
     {{ form_end(form) }}
 
-   
-            <a href="{{ path('questions_index') }}">Retour</a>
-     
+    <ul>
+        <li>
+            <a href="{{ path('questions_index') }}">Back to the list</a>
+        </li>
+    </ul>
 {% endblock %}
