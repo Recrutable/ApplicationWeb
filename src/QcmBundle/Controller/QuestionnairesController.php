@@ -12,19 +12,27 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Security("has_role('ROLE_ENTREPRISE')")
+ * @Route("qcm")
  */
 class QuestionnairesController extends Controller
 {
     /**
      * Lists all Questionnaires entities.
      *
-     * @Route("Qcm/show", name="Qcm_index")
+     * @Route("/", name="Qcm_index")
      * @Method("GET")
      */
     public function indexAction()
     {
         $repo = $this->getDoctrine()->getManager()->getRepository('QcmBundle:Questionnaires');
-        $listQuestionnaires = $repo->findAll();
+        $entrepriseRepo = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Entreprise');
+        $listQuestionnaires = $repo->findBy(
+            array(
+                'entreprise'=>$entrepriseRepo->getEntreprise(
+                    $this->getUser()
+                )
+            )
+        );
 
         return $this->render('QcmBundle:Questionnaires:index.html.twig', array(
             'questionnaires' => $listQuestionnaires,
@@ -34,7 +42,7 @@ class QuestionnairesController extends Controller
     /**
      * Creates a new Questionnaires entity.
      *
-     * @Route("Qcm/new", name="Qcm_new")
+     * @Route("/new", name="Qcm_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -45,6 +53,12 @@ class QuestionnairesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            // On set l'entreprise
+            $questionnaire->setEntreprise(
+                $em->getRepository('OCUserBundle:Entreprise')->getEntreprise(
+                    $this->getUser()
+                )
+            );
             $em->persist($questionnaire);
             $em->flush();
 
@@ -133,7 +147,7 @@ class QuestionnairesController extends Controller
             ->setAction($this->generateUrl('Qcm_delete', array('id' => $questionnaire->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
 
     public function ajoutQuestions()

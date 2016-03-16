@@ -44,6 +44,11 @@ class Questionnaires
     private $type;
 
     /**
+     * @ORM\ManyToOne(targetEntity="OCUserBundle\Entity\Entreprise")
+     */
+    private $entreprise;
+
+    /**
      * Get id
      *
      * @return int
@@ -124,6 +129,23 @@ class Questionnaires
     {
         return $this->type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEntreprise()
+    {
+        return $this->entreprise;
+    }
+
+    /**
+     * @param mixed $entreprise
+     */
+    public function setEntreprise($entreprise)
+    {
+        $this->entreprise = $entreprise;
+    }
+
 
     /**
      * Retourne le nom du formulaire
