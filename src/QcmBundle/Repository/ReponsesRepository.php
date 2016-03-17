@@ -28,7 +28,7 @@ class ReponsesRepository extends \Doctrine\ORM\EntityRepository
             ->innerJoin('REP.question', 'QU')
             ->innerJoin('QU.idQuestionnaire', 'REF')
             ->innerJoin('REP.user','USR')
-            ->groupBy('QU.id,USR.id')
+            ->groupBy('QU.id')
             ->where("USR.id = {$idUser}","REF.id = {$idQuestionnaire}")
             ->getQuery();
 
