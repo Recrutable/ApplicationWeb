@@ -1,3 +1,3 @@
 <?php
-header('location: app_dev.php');
+header('location: app.php');
 
