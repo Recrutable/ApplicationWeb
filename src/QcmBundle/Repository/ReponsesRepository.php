@@ -32,7 +32,12 @@ class ReponsesRepository extends \Doctrine\ORM\EntityRepository
             ->where("USR.id = {$idUser}","REF.id = {$idQuestionnaire}")
             ->getQuery();
 
-        $nombreReponse = $queryBuilder->getResult()[0]['nb_reponses'];
+        $reponse = $queryBuilder->getResult();
+        if((bool) $reponse) {
+            $nombreReponse = $reponse[0]['nb_reponses'];
+        } else {
+            $nombreReponse = 0;
+        }
 
         $queryBuilder = $this->getEntityManager()
             ->createQueryBuilder()
@@ -42,7 +47,12 @@ class ReponsesRepository extends \Doctrine\ORM\EntityRepository
             ->where("REF.id = {$idQuestionnaire}")
             ->getQuery();
 
-        $nombreQuestion = $queryBuilder->getResult()[0]['nb_question'];
+        $reponse = $queryBuilder->getResult();
+        if((bool) $reponse) {
+            $nombreQuestion = $reponse[0]['nb_question'];
+        } else {
+            $nombreQuestion = 0;
+        }
 
         return array(
             'nb_reponse'=>$nombreReponse,
