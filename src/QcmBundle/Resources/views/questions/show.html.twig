@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Question</h3>
+
+    <table class="table-hover table">
+        <tbody>
+        <tr>
+            <th>Question</th>
+            <td>{{ question.question }}</td>
+        </tr>
+        <tr>
+            <th>Reponse A</th>
+            <td>{{ question.reponseA }}</td>
+        </tr>
+        <tr>
+            <th>Reponse B</th>
+            <td>{{ question.reponseB }}</td>
+        </tr>
+        <tr>
+            <th>Reponse C</th>
+            <td>{{ question.reponseC }}</td>
+        </tr>
+        <tr>
+            <th>Bonne reponse</th>
+            <td>{{ question.bonneReponse }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul class="list-inline pull-right">
+        <li>
+            <a class="btn btn-default" href="{{ path('questions_index',{ 'id': question.id , id_questionnaires: questionnaire.id }) }}">
+                Retour a la liste des questions
+            </a>
+        </li>
+        <li>
+            <a class="btn btn-warning" href="{{ path('questions_edit', { 'id': question.id , id_questionnaires: questionnaire.id }) }}">
+                Modifier
+            </a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input class="btn btn-danger" type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questionnaires edit</h1>
+    <h3>Modification</h3>
     <div class="container jumbotron">
         {{ form_start(edit_form) }}
             {{ form_widget(edit_form) }}
-            <input type="submit" value="Valider les modifications" class="btn btn-default pull-right btn-space"/>             
+            <input type="submit" value="Valider les modifications" class="btn btn-success pull-right btn-space"/>
         {{ form_end(edit_form) }}
             
         <a href="{{ path('Qcm_index') }}" class="btn btn-info pull-right">Retour à la liste</a>
-
         {{ form_start(delete_form) }}
             <input type="submit" value="Supprimer" class="btn btn-danger  btn-space pull-right ">
         {{ form_end(delete_form) }}    

@@ -1,33 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questionnaires list</h1>
+    <h3>Liste des questionnaires</h3>
     <div class="container jumbotron">
-    <table class="table">
-        <thead>
+        <table class="table table-hover">
+            <thead>
             <tr>
                 <th>Nom</th>
                 <th>Domaine</th>
                 <th>Type</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for questionnaire in questionnaires %}
-            <tr>
-                <td>{{ questionnaire.nom }}</td>
-                <td>{{ questionnaire.domaine }}</td>
-                <td>{{ questionnaire.type }}</td>
-                <td>
-                        <a href="{{ path('Qcm_show', { 'id': questionnaire.id }) }}" class="btn btn-default">Voir</a>
-                        
-                        <a href="{{ path('Qcm_edit', { 'id': questionnaire.id }) }}" class="btn btn-info">Modifier</a>
-                </td>
-            </tr>
-            
-        {% endfor %}
-        </tbody>
-    </table>
-            <a href="{{ path('Qcm_new') }}" class="btn btn-success">Créer un nouvel formulaire</a>
+            </thead>
+            <tbody>
+            {% for questionnaire in questionnaires %}
+                <tr>
+                    <td>{{ questionnaire.nom }}</td>
+                    <td>{{ questionnaire.domaine }}</td>
+                    <td>{{ questionnaire.type }}</td>
+                    <td>
+                        <a href="{{ path('Qcm_show', { 'id': questionnaire.id }) }}" class="btn btn-default pull-right">Voir</a>
+
+                        <a href="{{ path('Qcm_edit', { 'id': questionnaire.id }) }}" class="btn btn-info pull-right">Modifier</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('Qcm_new') }}" class="btn btn-success pull-right">Créer un nouveau formulaire</a>
     </div>
 {% endblock %}

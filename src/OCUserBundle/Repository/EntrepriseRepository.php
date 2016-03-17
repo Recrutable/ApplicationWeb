@@ -10,4 +10,18 @@ namespace OCUserBundle\Repository;
  */
 class EntrepriseRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+     * Retourne l'entreprise lié a l'user
+     * @param $user
+     * @return mixed
+     */
+    public function getEntreprise($user)
+    {
+        return $this->findBy(
+            array(
+                'user'=>$user,
+            )
+        )[0];
+    }
 }
