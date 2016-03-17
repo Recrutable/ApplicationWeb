@@ -16,6 +16,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
  */
 class CandidaturesController extends Controller
 {
+    /**
+     * @Route("/profils/", name="profil_offre")
+     */
+    public function viewProfils(Offres $offres)
+    {
+        // On récupere la liste des user ayant postulés :
+        $candidaturesRepo = $this->getDoctrine()->getRepository('CandidaturesBundle:Candidatures');
+        $candidatures = $candidaturesRepo->findBy(
+            array(
+                'offres'=>$offres,
+            )
+        );
+
+        return $this->render('CandidaturesBundle:Candidatures:profils.html.twig', array(
+            'offres' => $offres,
+            'candidatures' => $candidatures,
+        ));
+    }
 
     /**
      * @Route("/", name="postuler_offre")
@@ -32,10 +50,10 @@ class CandidaturesController extends Controller
             $arrayEtat = $ReponseRepo->getEtatQuestionnaire($questionnaire->getId(),$this->getUser()->getId());
             $qcmFinis = $qcmFinis && ($arrayEtat['nb_reponse'] >= $arrayEtat['nb_question']);
             $retourQuestionnaire[] = array(
-                    'questionnaire' => $questionnaire,
-                    'etat' => $arrayEtat,
-                    'qcmFini'=>($arrayEtat['nb_reponse'] >= $arrayEtat['nb_question']),
-                );
+                'questionnaire' => $questionnaire,
+                'etat' => $arrayEtat,
+                'qcmFini'=>($arrayEtat['nb_reponse'] >= $arrayEtat['nb_question']),
+            );
         }
 
         // On affiche la liste des formulaire :
@@ -54,6 +72,32 @@ class CandidaturesController extends Controller
         $candidature = new Candidatures();
         $candidature->setOffres($offres);
         $candidature->setUser($this->getUser());
+
+        // On récupere la liste des formulaires, et l'etat pour chacun :
+        $listeQuestionnaire = $offres->getQuestionnaires();
+        $ReponseRepo = $this->getDoctrine()->getRepository('QcmBundle:Reponses');
+        $retourQuestionnaire = array();
+
+        $qcmFinis = true;
+        // Pour chaques questionnaires
+        foreach($listeQuestionnaire as $questionnaire) {
+            // On verifie que tout est repondu
+            $arrayEtat = $ReponseRepo->getEtatQuestionnaire($questionnaire->getId(),$this->getUser()->getId());
+            $qcmFinis = $qcmFinis && ($arrayEtat['nb_reponse'] >= $arrayEtat['nb_question']);
+
+            // On stock les resultat :
+            $retourQuestionnaire[$questionnaire->getNom()] = $ReponseRepo->getPourcentage(
+                $questionnaire->getId(),
+                $this->getUser()->getId()
+            );
+        }
+
+        if($qcmFinis){
+            $em = $this->getDoctrine()->getManager();
+            $candidature->setReponses($retourQuestionnaire);
+            $em->persist($candidature);
+            $em->flush();
+        }
 
         // On passe les requltats :
         $candidature->setReponses(

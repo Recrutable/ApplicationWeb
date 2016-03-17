@@ -26,9 +26,8 @@ class ReponsesRepository extends \Doctrine\ORM\EntityRepository
             ->select('COUNT(REP.id) as nb_reponses')
             ->from('QcmBundle:Reponses', 'REP')
             ->innerJoin('REP.question', 'QU')
-            ->innerJoin('QU.idQuestionnaire', 'REF')
-            ->innerJoin('REP.user','USR')
-            ->groupBy('QU.id')
+            ->leftJoin('QU.idQuestionnaire', 'REF')
+            ->leftJoin('REP.user','USR')
             ->where("USR.id = {$idUser}","REF.id = {$idQuestionnaire}")
             ->getQuery();
 
@@ -58,5 +57,28 @@ class ReponsesRepository extends \Doctrine\ORM\EntityRepository
             'nb_reponse'=>$nombreReponse,
             'nb_question'=>$nombreQuestion
         );
+    }
+
+    public function getPourcentage($questionnaireId,$UserId)
+    {
+
+        $queryBuilder = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('SUM(REP.topBonneReponse)/COUNT(REP.id) * 100 as pct_reponse')
+            ->from('QcmBundle:Reponses', 'REP')
+            ->innerJoin('REP.question', 'QU')
+            ->leftJoin('QU.idQuestionnaire', 'REF')
+            ->leftJoin('REP.user','USR')
+            ->where("USR.id = {$UserId}","REF.id = {$questionnaireId}")
+            ->getQuery();
+
+        $reponse = $queryBuilder->getResult();
+        if((bool) $reponse) {
+            $pourcentageReponse = $reponse[0]['pct_reponse'];
+        } else {
+            $pourcentageReponse = 'NR';
+        }
+        return $pourcentageReponse;
+
     }
 }

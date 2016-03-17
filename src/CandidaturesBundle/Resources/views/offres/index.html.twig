@@ -1,6 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    {% if is_granted('ROLE_ENTREPRISE') %}
+        <h3>Mes offres</h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for offre in offres if offre.entreprise.user == app.user %}
+                <tr>
+                    <td>{{ offre.titre }}</td>
+                    <td>{{ offre.description }}</td>
+                    <td>
+                        <ul class="list-inline">
+                            <li>
+                                <a class="btn btn-info" href="{{ path('offres_show', { 'id': offre.id }) }}">Consulter</a>
+                                <a class="btn btn-info" href="{{ path('profil_offre', { 'id_offre': offre.id }) }}">Resultats</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
     <h3>Liste des offres</h3>
 
     <table class="table table-hover">
