@@ -65,27 +65,18 @@
                     </a>
                 {% endif %}
             </form>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
-
-{% block notificationInfos %}
-{% endblock %}
-{% block notificationSucess %}
-{% endblock %}
-{% block notificationDanger %}
-{% endblock %}
-{% block notificationWarning %}
-{% endblock %}
-
-<script>
-    $('.notification').ready(function(){
-        $(this).css('left', 10 * 'px');
-    });
-</script>
 <div class="container jumbotron">
     {% block body %}
     {% endblock %}
 </div>
 </body>
+<footer class="footer">
+    <div class="container text-center">
+        <a href="{{ path('contact') }}"> Contacts </a>
+        <a href="{{ path('apropos') }}"> A propos et CGU </a>
+    </div>    
+</footer>
 </html>
