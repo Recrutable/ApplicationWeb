@@ -42,7 +42,7 @@ class Questions
      */
     private $reponseB;
 
-/**
+    /**
      * @var string
      *
      * @ORM\Column(name="reponseC", type="string", length=255)
@@ -57,10 +57,15 @@ class Questions
     private $bonneReponse;
 
     /**
-     * @ORM\ManyToOne(targetEntity="QcmBundle\Entity\Questionnaires")
+     * @ORM\ManyToOne(targetEntity="QcmBundle\Entity\Questionnaires" , inversedBy="questionnaires")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idQuestionnaire;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="QcmBundle\Entity\Reponses", mappedBy="reponses")
+     */
+    private $reponses;
 
 
     /**

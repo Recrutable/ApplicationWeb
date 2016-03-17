@@ -41,7 +41,7 @@ class Offres
     private $entreprise;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QcmBundle\Entity\Questionnaires", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="QcmBundle\Entity\Questionnaires", cascade={"persist"}, inversedBy="questionnaires")
      */
     private $questionnaires;
 

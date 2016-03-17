@@ -26,6 +26,11 @@ class User extends BaseUser
      */
     protected $tel;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="QcmBundle\Entity\Reponses", mappedBy="reponses")
+     */
+    private $reponses;
+
     public function getTel()
     {
         return $this->tel;
