@@ -1,6 +1,7 @@
 <?php
 
 namespace QcmBundle\Repository;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * QuestionsRepository
@@ -10,4 +11,29 @@ namespace QcmBundle\Repository;
  */
 class QuestionsRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+     * Retourne la question numero $page du questionnaire
+     * @param $questionnaires
+     * @param $numero
+     * @return Question | False
+     */
+    public function getQuestion($questionnaires,$numero){
+
+        $listeQuestions = $this->findBy(
+            array(
+                'idQuestionnaire'=>$questionnaires,
+            ),
+            array(
+                'id' => 'ASC'
+            )
+        );
+
+        // Si le listequestion n'est pas vide, et que la question demandée existe
+        if((bool) $listeQuestions && isset($listeQuestions[$numero])) {
+            return $listeQuestions[$numero];
+        } else {
+            return false;
+        }
+    }
 }

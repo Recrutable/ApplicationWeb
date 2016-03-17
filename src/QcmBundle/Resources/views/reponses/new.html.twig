@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Question numero {{ page }}</h3>
+    <p class="container-viewport">
+        <strong>
+            {{ question.question }}
+        </strong>
+    </p>
+    <ul>
+        <li>
+            <strong>A :</strong> {{ question.reponseA }}
+        </li>
+        <li>
+            <strong>B :</strong> {{ question.reponseB }}
+        </li>
+        <li>
+            <strong>C :</strong> {{ question.reponseC }}
+        </li>
+    </ul>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input class="btn btn-success pull-right" type="submit" value="Ajouter" />
+    {{ form_end(form) }}
+    <a href="{{ path('Qcm_index') }}" class="btn btn-danger pull-right">Retour</a>
+{% endblock %}
