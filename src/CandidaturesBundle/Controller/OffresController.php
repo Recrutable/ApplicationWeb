@@ -21,7 +21,7 @@ class OffresController extends Controller
     /**
      * Lists all Offres entities.
      *
-     * @Route("/", name="offres_index")
+     * @Route("/index", name="offres_index")
      * @Method("GET")
      */
     public function indexAction()

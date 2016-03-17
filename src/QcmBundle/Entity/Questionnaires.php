@@ -49,6 +49,16 @@ class Questionnaires
     private $entreprise;
 
     /**
+     * @ORM\ManyToMany(targetEntity="CandidaturesBundle\Entity\Offres", cascade={"persist"}, mappedBy="offres")
+     */
+    private $offres;
+
+    /**
+     * @ORM\OneToMany(targetEntity="QcmBundle\Entity\Questionnaires", cascade={"persist"}, mappedBy="questions")
+     */
+    private $questions;
+
+    /**
      * Get id
      *
      * @return int

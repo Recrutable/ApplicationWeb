@@ -24,10 +24,10 @@ class ReponsesController extends Controller
     /**
      * Creates as many Reponse entity than a Questionaires entity has response
      *
-     * @Route("/postuler/{page}", name="postuler_questionnaire")
+     * @Route("/{id_offre}/{page}", name="postuler_questionnaire")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Questionnaires $questionnaires,$page = 0)
+    public function newAction(Request $request, Questionnaires $questionnaires,$id_offre, $page = 0)
     {
 
         // On récupere la question numero $page du questionnaire
@@ -39,6 +39,7 @@ class ReponsesController extends Controller
         // On crée le formulaire
         $action = $this->generateUrl('postuler_questionnaire',array(
                 'id_questionnaires'=>$questionnaires->getId(),
+                'id_offre'=>$id_offre,
                 'page'=>$page,
             )
         );
@@ -54,6 +55,14 @@ class ReponsesController extends Controller
             // On verifie la reponse
             $bonneReponse = $Question->getBonneReponse();
             $reponse = $reponses->getReponse();
+
+            $reponses->setUser(
+                array(
+                    $this->getUser()
+                ));
+            $reponses->setQuestion(array(
+                $Question
+            ));
             $reponses->setTopBonneReponse(
                 ($bonneReponse == $reponse)
             );
@@ -64,9 +73,15 @@ class ReponsesController extends Controller
 
             // On reprend le formulaire
             if($nextQuestion) {
-                return $this->redirectToRoute('postuler_questionnaire', array('id_questionnaires'=>$questionnaires->getId(),'page' => $page+1));
+                return $this->redirectToRoute('postuler_questionnaire', array(
+                    'id_questionnaires'=>$questionnaires->getId(),
+                    'id_offre'=>$id_offre,
+                    'page' => $page+1
+                ));
             } else {
-                die('fin du questionnaire');
+                return $this->redirectToRoute('offres_show', array(
+                    'id'=>$id_offre,
+                ));
             }
         }
 

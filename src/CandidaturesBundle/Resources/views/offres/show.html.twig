@@ -16,6 +16,9 @@
         </tbody>
     </table>
 
+    <span>
+        {{ render(controller('CandidaturesBundle:Candidatures:postuler',{id_offre:offre.id})) }}
+    </span>
     <ul class="pull-right list-inline">
         <li>
             <a class="btn btn-default" href="{{ path('offres_index') }}">Retour à la liste des offres</a>

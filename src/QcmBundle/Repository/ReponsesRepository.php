@@ -2,6 +2,8 @@
 
 namespace QcmBundle\Repository;
 
+use Doctrine\ORM\Query\Expr\Join;
+
 /**
  * ReponsesRepository
  *
@@ -10,4 +12,41 @@ namespace QcmBundle\Repository;
  */
 class ReponsesRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $idQuestionnaire
+     * @param $idUser
+     * @return array
+     */
+    public function getEtatQuestionnaire($idQuestionnaire,$idUser)
+    {
+        $em = $this->getEntityManager();
+
+        $queryBuilder = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('COUNT(REP.id) as nb_reponses')
+            ->from('QcmBundle:Reponses', 'REP')
+            ->innerJoin('REP.question', 'QU')
+            ->innerJoin('QU.idQuestionnaire', 'REF')
+            ->innerJoin('REP.user','USR')
+            ->groupBy('QU.id,USR.id')
+            ->where("USR.id = {$idUser}","REF.id = {$idQuestionnaire}")
+            ->getQuery();
+
+        $nombreReponse = $queryBuilder->getResult()[0]['nb_reponses'];
+
+        $queryBuilder = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('COUNT(QU.id) as nb_question')
+            ->from('QcmBundle:Questions', 'QU')
+            ->innerJoin('QU.idQuestionnaire', 'REF')
+            ->where("REF.id = {$idQuestionnaire}")
+            ->getQuery();
+
+        $nombreQuestion = $queryBuilder->getResult()[0]['nb_question'];
+
+        return array(
+            'nb_reponse'=>$nombreReponse,
+            'nb_question'=>$nombreQuestion
+        );
+    }
 }

@@ -23,12 +23,12 @@ class Reponses
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="OCUserBundle\Entity\User")
+     * @ORM\ManyToMany(targetEntity="OCUserBundle\Entity\User", inversedBy="user")
      */
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QcmBundle\Entity\Questions")
+     * @ORM\ManyToMany(targetEntity="QcmBundle\Entity\Questions", inversedBy="question")
      */
     private $question;
 
