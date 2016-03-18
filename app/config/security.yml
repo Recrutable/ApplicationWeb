@@ -46,4 +46,6 @@ security:
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register(|/)$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/contact$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/apropos$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^, roles: IS_AUTHENTICATED_REMEMBERED } # On ferme l'acces au reste du site
